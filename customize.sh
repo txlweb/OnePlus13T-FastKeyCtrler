@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODDIR=${0%/*}
+
 pname=$(getprop ro.product.model)
 echo "您的手机型号：$pname"
 if [ "$pname" = "PKX110" ]; then
@@ -30,5 +30,5 @@ echo "[√] 安装完成"
 echo ""
 echo "[!] 按键功能需要重启才能生效"
 
-sed -i '/^description=/d' "$MODDIR/module.prop"
-echo "description=[!] 按键功能需要重启才能生效" >> $MODDIR/module.prop
+sed -i '/^description=/d' "module.prop"
+echo "description=[!] 按键功能需要重启才能生效" >> module.prop
