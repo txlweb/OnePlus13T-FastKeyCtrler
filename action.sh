@@ -9,7 +9,6 @@ echo "- 尝试重启按键监听服务"
 
 echo "- 正在尝试结束服务..."
 
-# 如果已有运行实例，则杀掉它
 if [ -f "$LOCK_FILE" ]; then
     OLD_PID=$(cat "$LOCK_FILE")
     if [ -d "/proc/$OLD_PID" ]; then
@@ -27,11 +26,11 @@ echo "- 正在尝试重启服务..."
 
 sh $MODDIR/service.sh
 
-# 3. 显示状态
 NEW_PID=$(cat "$LOCK_FILE" 2>/dev/null)
 if [ -n "$NEW_PID" ] && [ -d "/proc/$NEW_PID" ]; then
     echo "[√] 服务重启成功 [ $NEW_PID ]"
 else
     echo "[x] 服务重启失败!"
 fi
+
 
