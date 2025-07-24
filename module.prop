@@ -3,5 +3,5 @@ name=一加13系 物理快捷键自定义功能
 version=1.3
 versionCode=4
 author=IDlike
-description=[!] 按键功能需要重启才能生效
 updateJson=https://raw.githubusercontent.com/txlweb/OnePlus13T-FastKeyCtrler/refs/heads/main/update.json
+description=[!] 按键功能需要重启才能生效
