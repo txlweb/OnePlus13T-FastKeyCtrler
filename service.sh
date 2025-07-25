@@ -24,6 +24,19 @@ KEY="BTN_TRIGGER_HAPPY32"
 
 CLICK_COUNT_FILE="/tmp/click_count_flag"
 
+CONF_CLICK_TIME="$MODDIR/clconf.txt"
+
+if [ -f "$CONF_CLICK_TIME" ]; then
+    CLICK_TIME_SHORT=$(sed -n 1p "$CONF_CLICK_TIME")
+    CLICK_TIME_LONG=$(sed -n 2p "$CONF_CLICK_TIME")
+else
+    CLICK_TIME_SHORT=500
+    CLICK_TIME_LONG=1000
+fi
+
+: "${CLICK_TIME_LONG:=1000}"
+: "${CLICK_TIME_SHORT:=500}"
+
 last_time=0
 click_count=0
 press_start=0
@@ -87,9 +100,9 @@ setproctitle
                   duration=$((now_total - press_start))
                   echo "🔼 松开, 持续 ${duration}ms"
 
-                  if [ $duration -gt 1000 ]; then
+                  if [ $duration -gt "$CLICK_TIME_LONG" ]; then
                       do_long_press_1000
-                  elif [ $duration -gt 500 ]; then
+                  elif [ $duration -gt "$CLICK_TIME_SHORT" ]; then
                       do_long_press_500
                       click_count=0
                   else
