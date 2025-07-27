@@ -1,7 +1,7 @@
 {
-  "version": "1.44",
-  "versionCode": 5,
-  "downloadUrl": "https://github.com/txlweb/OnePlus13T-FastKeyCtrler/releases/download/1.4/OnePlus13T-FastKeyCtrler.zip",
-  "changelog": "修改UI,使用RMB配色表。\n新增：选择活动并生成命令。\n新增：在应用内调整按键时间\n新增：在应用内重启服务\n\n推荐尽快更新此版本，因为真的很好！",
+  "version": "1.5",
+  "versionCode": 6,
+  "downloadUrl": "https://github.com/txlweb/OnePlus13T-FastKeyCtrler/releases/download/1.5/OnePlus13T-FastKeyCtrler.zip",
+  "changelog": "支持自定义命令/要素显示（json修改）\n支持无ROOT模式（ADB激活）",
   "timestamp": 1721893005
 }

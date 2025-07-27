@@ -16,6 +16,10 @@
 
 图形化应用暂不开源（我写的一坨）。
 
+现在支持无ROOT权限使用，需要安装并打开应用后ADB激活
+
+> ./adb shell sh /storage/emulated/0/Android/data/com.idlike.kctrl.app/service.sh
+
 功能详情可见安装时日志。
 
 
