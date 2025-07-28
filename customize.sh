@@ -9,7 +9,7 @@ echo "[i] 临时模块目录：$MODDIR"
 
 mat=false
 case "$pname" in
-    PJZ110|CPH2649|CPH2653|CPH2655|PKX110|CPH2723)
+    PJZ110|CPH2649|CPH2653|CPH2655|PKX110|CPH2723|CHN110)
         mat=true
         ;;
     *)
