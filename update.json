@@ -1,7 +1,7 @@
 {
-  "version": "1.5",
-  "versionCode": 6,
-  "downloadUrl": "https://github.com/txlweb/OnePlus13T-FastKeyCtrler/releases/download/1.5/OnePlus13T-FastKeyCtrler.zip",
-  "changelog": "支持自定义命令/要素显示（json修改）\n支持无ROOT模式（ADB激活）",
+  "version": "1.6",
+  "versionCode": 7,
+  "downloadUrl": "https://github.com/txlweb/OnePlus13T-FastKeyCtrler/releases/download/1.6/OnePlus13T-FastKeyCtrler.zip",
+  "changelog": "修复1.5打不开问题，新增ADB模式下的运行状态检测，完全适配无ROOT的配置项。",
   "timestamp": 1721893005
 }

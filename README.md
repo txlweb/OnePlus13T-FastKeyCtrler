@@ -18,7 +18,13 @@
 
 现在支持无ROOT权限使用，需要安装并打开应用后ADB激活
 
-> ./adb shell sh /storage/emulated/0/Android/data/com.idlike.kctrl.app/service.sh
+电脑ADB激活
+
+> ./adb.exe shell sh /storage/emulated/0/Android/data/com.idlike.kctrl.app/files/service.sh
+
+黑域/甲壳虫ADB激活：
+
+> sh /storage/emulated/0/Android/data/com.idlike.kctrl.app/files/service.sh
 
 功能详情可见安装时日志。
 
