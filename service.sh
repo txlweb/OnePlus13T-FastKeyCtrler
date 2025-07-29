@@ -73,6 +73,9 @@ setproctitle
   sed -i '/^description=/d' "$MODDIR/module.prop"
   echo "description=[?] [ $PID ] 服务已启动，按下按键来测试是否生效。" >> $MODDIR/module.prop
   echo 0 > "$CLICK_COUNT_FILE"
+
+  echo "kctrl_service" > /sys/power/wake_lock
+
   while true; do
       getevent -lt "$DEVICE" | while read -r line; do
           set -- $line
