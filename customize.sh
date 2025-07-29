@@ -7,25 +7,29 @@ echo "[!!] 目前本模块仅支持一加13/13T全版本，适配其他有侧键
 echo "[i] 您的手机型号：$pname"
 echo "[i] 临时模块目录：$MODDIR"
 
-mat=false
-case "$pname" in
-    PJZ110|CPH2649|CPH2653|CPH2655|PKX110|CPH2723|CHN110)
-        mat=true
-        ;;
-    *)
-        mat=false
-        ;;
-esac
+#mat=false
+#case "$pname" in
+#    PJZ110|CPH2649|CPH2653|CPH2655|PKX110|CPH2723|CHN110)
+#        mat=true
+#        ;;
+#    *)
+#        mat=false
+#        ;;
+#esac
 
 
-if [ "$mat" = true ]; then
-    ui_print "[√] 机型匹配！"
-else
-    ui_print "[x] 设备型号不匹配！"
-    ui_print "仅限 [一加13/13T 系列] 刷入！"
-    abort "- Fail"
-    exit 2
-fi
+#if [ "$mat" = true ]; then
+#    ui_print "[√] 机型匹配！"
+#else
+#    ui_print "[x] 设备型号不匹配！"
+#    ui_print "仅限 [一加13/13T 系列] 刷入！"
+#    abort "- Fail"
+#    exit 2
+#fi
+echo "现已移除机型检测，如果无效果证明机型不匹配，请卸载模块。"
+echo "现已移除机型检测，如果无效果证明机型不匹配，请卸载模块。"
+echo "现已移除机型检测，如果无效果证明机型不匹配，请卸载模块。"
+echo "现已移除机型检测，如果无效果证明机型不匹配，请卸载模块。"
 
 echo ""
 echo "!! 建议把设置里的快捷键设置为无操作 "
