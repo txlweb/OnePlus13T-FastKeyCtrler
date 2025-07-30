@@ -1,7 +1,7 @@
 {
-  "version": "1.7",
-  "versionCode": 8,
-  "downloadUrl": "https://github.com/txlweb/OnePlus13T-FastKeyCtrler/releases/download/1.6/OnePlus13T-FastKeyCtrler.zip",
-  "changelog": "修复无法息屏启动（低功耗，仅ROOT可用），修复ADB不能显示功能，增加手电控制（稳定），注意：必须给相机权限",
+  "version": "1.8 b",
+  "versionCode": 9,
+  "downloadUrl": "https://github.com/txlweb/OnePlus13T-FastKeyCtrler/releases/download/1.8/OnePlus13T-FastKeyCtrler.zip",
+  "changelog": "新增一加13（正在测试，建议不要刷入！），更改刷入页面逻辑，支持自主选择刷入类型。新增静音/响铃/震动/免打扰检测与切换。修复重启服务bug。",
   "timestamp": 1722257852
 }

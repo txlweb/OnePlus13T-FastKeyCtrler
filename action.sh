@@ -26,7 +26,11 @@ echo "- 正在尝试重启服务..."
 
 sh $MODDIR/service.sh &
 
+sleep 0.5
+
+
 NEW_PID=$(cat "$LOCK_FILE" 2>/dev/null)
+echo $NEW_PID
 if [ -n "$NEW_PID" ] && [ -d "/proc/$NEW_PID" ]; then
     echo "[√] 服务重启成功 [ $NEW_PID ]"
 else

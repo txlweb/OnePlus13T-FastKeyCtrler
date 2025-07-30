@@ -1,62 +1,81 @@
 #!/bin/bash
 
 MODDIR="/data/adb/modules_update/OP13tFastKeyCtrler"
-APK_PATH="$MODPATH/manager.apk"
+APK_PATH="$MODDIR/manager.apk"
 PKG_NAME="com.idlike.kctrl.app"
 pname=$(getprop ro.product.model)
+OUTFILE="$MODDIR/phone.txt"
+
 echo "[!!] 目前本模块仅支持一加13/13T全版本，适配其他有侧键的手机请联系作者。"
 echo "[i] 您的手机型号：$pname"
 echo "[i] 临时模块目录：$MODDIR"
 
-#mat=false
-#case "$pname" in
-#    PJZ110|CPH2649|CPH2653|CPH2655|PKX110|CPH2723|CHN110)
-#        mat=true
-#        ;;
-#    *)
-#        mat=false
-#        ;;
-#esac
+# 以文本列表实现选项
+index=0
+total=2  # 总选项数量
 
+# 获取当前选项
+get_model_name() {
+  case "$1" in
+    0) echo "OP13T" ;;
+    1) echo "OP13" ;;
+    # 你可以继续加其他项
+    *) echo "未知" ;;
+  esac
+}
 
-#if [ "$mat" = true ]; then
-#    ui_print "[√] 机型匹配！"
-#else
-#    ui_print "[x] 设备型号不匹配！"
-#    ui_print "仅限 [一加13/13T 系列] 刷入！"
-#    abort "- Fail"
-#    exit 2
-#fi
-echo "现已移除机型检测，如果无效果证明机型不匹配，请卸载模块。"
-echo "现已移除机型检测，如果无效果证明机型不匹配，请卸载模块。"
-echo "现已移除机型检测，如果无效果证明机型不匹配，请卸载模块。"
-echo "现已移除机型检测，如果无效果证明机型不匹配，请卸载模块。"
+# 等待按键函数
+until_key() {
+  PIPE="$MODDIR/$$.pipe"
+  mkfifo "$PIPE" 2>/dev/null
+  getevent -l > "$PIPE" &
+  GETEVENT_PID=$!
 
+  while read -r line; do
+    case "$line" in
+      *KEY_VOLUMEUP*DOWN*)
+        kill $GETEVENT_PID 2>/dev/null
+        rm -f "$PIPE"
+        echo "up"
+        return
+        ;;
+      *KEY_VOLUMEDOWN*DOWN*)
+        kill $GETEVENT_PID 2>/dev/null
+        rm -f "$PIPE"
+        echo "down"
+        return
+        ;;
+    esac
+  done < "$PIPE"
+
+  kill $GETEVENT_PID 2>/dev/null
+  rm -f "$PIPE"
+}
+
+# 显示提示
 echo ""
-echo "!! 建议把设置里的快捷键设置为无操作 "
-echo ""
-echo " 本模块默认操作："
-echo " 1. 单击          ：    播放/暂停"
-echo " 2. 双击          ：    截屏"
-echo " 3. 长按0.5s   ：    静音/解除静音"
-echo " 4. 长按1s       ：    录音"
-echo ""
-echo "如需自定义操作， 请自行修改脚本，即将安装管理器..."
-echo "[+] 安装 manager.apk "
-if pm list packages | grep -q "$PKG_NAME"; then
-    pm uninstall "$PKG_NAME"
-fi
-pm install -r "$MODDIR/manager.apk"
-echo "[+] 侧键控制器 安装完成 (com.idlike.kctrl.app) "
+echo "=============================="
+echo "设备型号选择器"
+echo "音量上键 → 切换型号"
+echo "音量下键 → 确定并写入"
+echo "=============================="
 echo ""
 
-echo "安装完成，如果您需要恢复管理器，请重装模块。"
-echo "[!] 您需要手动给予管理器SU权限，这样它才能与模块通信！"
-echo "按操作修改，保存即生效。"
-echo ""
-echo "如果功能失效，请运行action或重启手机。"
-echo ""
-
-echo "[√] 安装完成"
-echo ""
-echo "[!] 按键功能需要重启才能生效"
+# 主循环
+while true; do
+  current_model=$(get_model_name "$index")
+  echo "请按键选择（当前：$current_model）..."
+  case "$(until_key)" in
+    "up")
+      index=$(( (index + 1) % total ))
+      echo "→ 切换为：$(get_model_name "$index")"
+      ;;
+    "down")
+      selected=$(get_model_name "$index")
+      echo "✅ 已选择：$selected"
+      echo "$selected" > "$OUTFILE"
+      echo "✔️ 已写入到：$OUTFILE"
+      break
+      ;;
+  esac
+done
