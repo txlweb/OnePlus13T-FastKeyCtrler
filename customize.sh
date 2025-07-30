@@ -2,6 +2,7 @@
 
 MODDIR="/data/adb/modules_update/OP13tFastKeyCtrler"
 APK_PATH="$MODPATH/manager.apk"
+PKG_NAME="com.idlike.kctrl.app"
 pname=$(getprop ro.product.model)
 echo "[!!] 目前本模块仅支持一加13/13T全版本，适配其他有侧键的手机请联系作者。"
 echo "[i] 您的手机型号：$pname"
@@ -42,6 +43,9 @@ echo " 4. 长按1s       ：    录音"
 echo ""
 echo "如需自定义操作， 请自行修改脚本，即将安装管理器..."
 echo "[+] 安装 manager.apk "
+if pm list packages | grep -q "$PKG_NAME"; then
+    pm uninstall "$PKG_NAME"
+fi
 pm install -r "$MODDIR/manager.apk"
 echo "[+] 侧键控制器 安装完成 (com.idlike.kctrl.app) "
 echo ""

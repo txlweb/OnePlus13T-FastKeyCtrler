@@ -2,6 +2,6 @@
   "version": "1.7",
   "versionCode": 8,
   "downloadUrl": "https://github.com/txlweb/OnePlus13T-FastKeyCtrler/releases/download/1.6/OnePlus13T-FastKeyCtrler.zip",
-  "changelog": "修复无法息屏启动（低功耗，仅ROOT可用），修复ADB不能显示功能",
+  "changelog": "修复无法息屏启动（低功耗，仅ROOT可用），修复ADB不能显示功能，增加手电控制（稳定），注意：必须给相机权限",
   "timestamp": 1722257852
 }
