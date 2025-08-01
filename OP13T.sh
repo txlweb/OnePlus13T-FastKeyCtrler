@@ -78,7 +78,7 @@ setproctitle
   echo "kctrl_service" > /sys/power/wake_lock
 
   while true; do
-      getevent -lt "$DEVICE" | while read -r line; do
+      getevent -lt | while read -r line; do
           set -- $line
           sed -i '/^description=/d' "$MODDIR/module.prop"
           echo "description=[√] [ $PID ] 按键功能已经生效" >> $MODDIR/module.prop

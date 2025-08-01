@@ -1,7 +1,7 @@
 id=OP13tFastKeyCtrler
-name=一加13系 物理快捷键自定义功能 [BETA]
+name=一加13系 物理快捷键自定义功能 [BETA2]
 version=1.8
-versionCode=9
+versionCode=10
 author=IDlike
 updateJson=https://raw.githubusercontent.com/txlweb/OnePlus13T-FastKeyCtrler/refs/heads/main/update.json
 description=[!] 按键功能需要重启才能生效

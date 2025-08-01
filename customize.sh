@@ -18,7 +18,8 @@ total=2  # 总选项数量
 get_model_name() {
   case "$1" in
     0) echo "OP13T" ;;
-    1) echo "OP13" ;;
+    1) echo "OP13A" ;;
+    2) echo "OP13B" ;;
     # 你可以继续加其他项
     *) echo "未知" ;;
   esac
@@ -53,6 +54,13 @@ until_key() {
 }
 
 # 显示提示
+echo "=============================="
+
+echo "各机型绑定的按键："
+echo " OP13T : 左侧侧键"
+echo " OP13A  : 电源键  "
+echo " OP13B  : 三段式滑动 （上下上对应单击，下上下对应双击，其他无功能）  "
+
 echo ""
 echo "=============================="
 echo "设备型号选择器"
@@ -79,3 +87,27 @@ while true; do
       ;;
   esac
 done
+
+
+
+echo ""
+echo "!! 建议把设置里的快捷键设置为无操作 "
+echo ""
+
+echo ""
+echo "如需自定义操作， 请自行修改脚本，即将安装管理器..."
+echo "[+] 安装 manager.apk "
+pm install -r "$MODDIR/manager.apk"
+echo "[+] 侧键控制器 安装完成 (com.idlike.kctrl.app) "
+echo ""
+
+echo "安装完成，如果您需要恢复管理器，请重装模块。"
+echo "[!] 您需要手动给予管理器SU权限，这样它才能与模块通信！"
+echo "按操作修改，保存即生效。"
+echo ""
+echo "如果功能失效，请运行action或重启手机。"
+echo ""
+
+echo "[√] 安装完成"
+echo ""
+echo "[!] 按键功能需要重启才能生效"

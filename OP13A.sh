@@ -19,8 +19,8 @@ fi
 sleep 0.1
 
 MYTAG="system_server"
-DEVICE="/dev/input/event6"
-KEY="KEY_F3"
+DEVICE="/dev/input/event2"
+KEY="KEY_POWER"
 
 CLICK_COUNT_FILE="/tmp/click_count_flag"
 
@@ -68,19 +68,18 @@ setproctitle() {
 
 setproctitle
 
+(
 
   PID=$(cat "$LOCK_FILE")
   sed -i '/^description=/d' "$MODDIR/module.prop"
   echo "description=[?] [ $PID ] 服务已启动，按下按键来测试是否生效。" >> $MODDIR/module.prop
   echo 0 > "$CLICK_COUNT_FILE"
-  echo $$ > "$LOCK_FILE"
 
   echo "kctrl_service" > /sys/power/wake_lock
 
   while true; do
       getevent -lt "$DEVICE" | while read -r line; do
           set -- $line
-          echo $line > "output_log.txt"
           sed -i '/^description=/d' "$MODDIR/module.prop"
           echo "description=[√] [ $PID ] 按键功能已经生效" >> $MODDIR/module.prop
 
@@ -151,5 +150,5 @@ setproctitle
   done
   sed -i '/^description=/d' "$MODDIR/module.prop"
   echo "description=[x] [ $PID ] 服务被杀死，请尝试手动重启..." >> $MODDIR/module.prop
-
-
+) &
+  echo $! > "$LOCK_FILE"
