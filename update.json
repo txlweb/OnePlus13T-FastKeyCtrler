@@ -1,7 +1,7 @@
 {
-  "version": "1.8 b2",
+  "version": "1.8 b3",
   "versionCode": 10,
   "downloadUrl": "https://github.com/txlweb/OnePlus13T-FastKeyCtrler/releases/download/1.8/OnePlus13T-FastKeyCtrler.zip",
-  "changelog": "新增一加13 AB版本（B版本正在测试，建议不要刷入！），更改刷入页面逻辑，支持自主选择刷入类型。新增静音/响铃/震动/免打扰检测与切换。修复重启服务bug。修复手电筒bug",
+  "changelog": "新增一加13 AB版本（B版本正在测试，建议不要刷入！），更改刷入页面逻辑，支持自主选择刷入类型。新增静音/响铃/震动/免打扰检测与切换。修复重启服务bug。修复手电筒bug?",
   "timestamp": 1722257852
 }

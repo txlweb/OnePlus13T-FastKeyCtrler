@@ -22,6 +22,10 @@ MYTAG="system_server"
 DEVICE="/dev/input/event0"
 KEY="BTN_TRIGGER_HAPPY32"
 
+
+LOGFILE="$MODDIR/log.txt"
+
+
 CLICK_COUNT_FILE="/tmp/click_count_flag"
 
 CONF_CLICK_TIME="$MODDIR/clconf.txt"
@@ -65,7 +69,9 @@ do_long_press_1000() {
 setproctitle() {
     [ -x "$(command -v printf)" ] && printf "\033]0;%s\007" "$MYTAG"
 }
-
+timestamp() {
+    date "+%Y-%m-%d %H:%M:%S.%3N"
+}
 setproctitle
 
 (
@@ -78,11 +84,11 @@ setproctitle
   echo "kctrl_service" > /sys/power/wake_lock
 
   while true; do
-      getevent -lt | while read -r line; do
+      getevent -lt "$DEVICE" | while read -r line; do
           set -- $line
           sed -i '/^description=/d' "$MODDIR/module.prop"
           echo "description=[√] [ $PID ] 按键功能已经生效" >> $MODDIR/module.prop
-
+          echo "$line"
           event_time=$2
           event_type=$3
           event_key=$4
@@ -97,12 +103,12 @@ setproctitle
               if [ "$event_action" = "DOWN" ]; then
                   press_start=$now_total
                   pressing=1
-                  echo "🔽 按下"
+                  echo "$(timestamp) 🔽 按下" >> "$LOGFILE"
 
               elif [ "$event_action" = "UP" ]; then
                   pressing=0
                   duration=$((now_total - press_start))
-                  echo "🔼 松开, 持续 ${duration}ms"
+                  echo "$(timestamp) 🔼 松开, 持续 ${duration}ms" >> "$LOGFILE"
 
                   if [ $duration -gt "$CLICK_TIME_LONG" ]; then
                       do_long_press_1000

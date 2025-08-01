@@ -12,7 +12,7 @@ echo "[i] 临时模块目录：$MODDIR"
 
 # 以文本列表实现选项
 index=0
-total=2  # 总选项数量
+total=3  # 总选项数量
 
 # 获取当前选项
 get_model_name() {
@@ -96,9 +96,27 @@ echo ""
 
 echo ""
 echo "如需自定义操作， 请自行修改脚本，即将安装管理器..."
-echo "[+] 安装 manager.apk "
-pm install -r "$MODDIR/manager.apk"
-echo "[+] 侧键控制器 安装完成 (com.idlike.kctrl.app) "
+PACKAGE="com.idlike.kctrl.app"
+
+echo "[+] 检查是否已安装 $PACKAGE"
+
+if pm list packages | grep -q "$PACKAGE"; then
+    echo "[+] 检测到已安装，准备卸载 $PACKAGE"
+    pm uninstall "$PACKAGE"
+    sleep 1
+else
+    echo "[+] 未检测到已安装的 $PACKAGE"
+fi
+
+echo "[+] 正在安装 manager.apk..."
+pm install -r "$APK_PATH"
+
+if [ $? -eq 0 ]; then
+    echo "[+] 侧键控制器 安装完成 ($PACKAGE)"
+else
+    echo "[!] 安装失败，请检查 APK 是否存在或签名问题"
+fi
+
 echo ""
 
 echo "安装完成，如果您需要恢复管理器，请重装模块。"
