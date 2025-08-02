@@ -143,7 +143,7 @@ while true; do
                 echo "🔼 松开"
 
                 am start-foreground-service -n com.idlike.kctrl.app/.NoteModeGetter
-                sleep 0.3
+                sleep 0.1
                 mode=$(cat /sdcard/Android/data/com.idlike.kctrl.app/files/mode.txt)
                 echo "当前模式：$mode"
 
@@ -157,15 +157,19 @@ while true; do
                 curr_time="$now_total"
 
                 # 检查三段切换方向（在1s内往返）
-                if [ "$prev_mode" = "$curr_mode" ] && [ "$last_mode" != "$curr_mode" ]; then
-                    if [ $((curr_time - prev_time)) -le $CLICK_TIME ]; then
+
+                # 检查：curr_mode 与 last_mode 是否在 1s 内切换并触发动作
+                if [ "$curr_mode" != "$last_mode" ]; then
+                    if [ $((curr_time - last_time)) -le $CLICK_TIME ]; then
                         level_last=$(get_mode_level "$last_mode")
                         level_curr=$(get_mode_level "$curr_mode")
 
+                        echo "等级对比：$level_last -> $level_curr"
+
                         if [ "$level_last" -gt "$level_curr" ]; then
-                            do_single_click
-                        else
-                            do_double_click
+                            do_single_click  # 向下滑
+                        elif [ "$level_last" -lt "$level_curr" ]; then
+                            do_double_click  # 向上滑
                         fi
                     fi
                 fi
