@@ -126,7 +126,28 @@ echo ""
 echo "如果功能失效，请运行action或重启手机。"
 echo ""
 
+SRC_DIR="/data/adb/modules/OP13tFastKeyCtrler"
+DST_DIR="/data/adb/modules_update/OP13tFastKeyCtrler"
+
+# 创建目标目录（如果不存在）
+mkdir -p "$DST_DIR"
+
+# 判断并复制 clconf.txt
+if [ -f "$SRC_DIR/clconf.txt" ]; then
+    cp -f "$SRC_DIR/clconf.txt" "$DST_DIR/clconf.txt"
+    echo "[+] 已继承配置文件 (1)"
+fi
+
+# 判断并复制 scripts 目录
+if [ -d "$SRC_DIR/scripts" ]; then
+    cp -a "$SRC_DIR/scripts" "$DST_DIR/scripts"
+    echo "[+] 已继承配置文件 (2)"
+
+fi
+
+# 输出提示信息
 echo "[√] 安装完成"
+
 echo ""
 echo "[!] 按键功能需要重启才能生效"
 echo ""

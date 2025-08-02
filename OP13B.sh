@@ -48,7 +48,7 @@ echo "HALL_EVENT=$HALL_EVENT"
 
 
 MYTAG="system_server"
-DEVICE="/dev/input/$HALL_EVENT"
+DEVICE="$HALL_EVENT"
 KEY="KEY_F3"
 
 CLICK_COUNT_FILE="/tmp/click_count_flag"
@@ -56,15 +56,12 @@ CLICK_COUNT_FILE="/tmp/click_count_flag"
 CONF_CLICK_TIME="$MODDIR/clconf.txt"
 
 if [ -f "$CONF_CLICK_TIME" ]; then
-    CLICK_TIME_SHORT=$(sed -n 1p "$CONF_CLICK_TIME")
-    CLICK_TIME_LONG=$(sed -n 2p "$CONF_CLICK_TIME")
+    CLICK_TIME=$(sed -n 3p "$CONF_CLICK_TIME")
 else
-    CLICK_TIME_SHORT=500
-    CLICK_TIME_LONG=1000
+    CLICK_TIME=2000
 fi
 
-: "${CLICK_TIME_LONG:=1000}"
-: "${CLICK_TIME_SHORT:=500}"
+: "${CLICK_TIME:=2000}"
 
 last_time=0
 click_count=0
@@ -161,7 +158,7 @@ while true; do
 
                 # 检查三段切换方向（在1s内往返）
                 if [ "$prev_mode" = "$curr_mode" ] && [ "$last_mode" != "$curr_mode" ]; then
-                    if [ $((curr_time - prev_time)) -le 1000 ]; then
+                    if [ $((curr_time - prev_time)) -le $CLICK_TIME ]; then
                         level_last=$(get_mode_level "$last_mode")
                         level_curr=$(get_mode_level "$curr_mode")
 
@@ -180,5 +177,6 @@ done
 
   sed -i '/^description=/d' "$MODDIR/module.prop"
   echo "description=[x] [ $PID ] 服务被杀死，请尝试手动重启..." >> $MODDIR/module.prop
-) &
+  )&
+
   echo $! > "$LOCK_FILE"
