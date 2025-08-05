@@ -27,7 +27,7 @@ get_model_name() {
 
 # 等待按键函数
 until_key() {
-  PIPE="$MODDIR/$$.pipe"
+  PIPE="/data/$$.pipe"
   mkfifo "$PIPE" 2>/dev/null
   getevent -l > "$PIPE" &
   GETEVENT_PID=$!
@@ -59,7 +59,7 @@ echo "=============================="
 echo "各机型绑定的按键："
 echo " OP13T : 左侧侧键"
 echo " OP13A  : 电源键  "
-echo " OP13B  : 三段式滑动 （上下上对应单击，下上下对应双击，其他无功能）  "
+echo " OP13B  : 三段式滑动 （上下对应单击，下上对应双击，其他无功能）  "
 
 echo ""
 echo "=============================="
@@ -96,17 +96,17 @@ echo ""
 
 echo ""
 echo "如需自定义操作， 请自行修改脚本，即将安装管理器..."
-PACKAGE="com.idlike.kctrl.app"
-
-echo "[+] 检查是否已安装 $PACKAGE"
-
-if pm list packages | grep -q "$PACKAGE"; then
-    echo "[+] 检测到已安装，准备卸载 $PACKAGE"
-    pm uninstall "$PACKAGE"
-    sleep 1
-else
-    echo "[+] 未检测到已安装的 $PACKAGE"
-fi
+#PACKAGE="com.idlike.kctrl.app"
+#
+#echo "[+] 检查是否已安装 $PACKAGE"
+#
+#if pm list packages | grep -q "$PACKAGE"; then
+#    echo "[+] 检测到已安装，准备卸载 $PACKAGE"
+#    pm uninstall "$PACKAGE"
+#    sleep 1
+#else
+#    echo "[+] 未检测到已安装的 $PACKAGE"
+#fi
 
 echo "[+] 正在安装 manager.apk..."
 pm install -r "$APK_PATH"

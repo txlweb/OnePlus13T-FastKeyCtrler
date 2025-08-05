@@ -1,0 +1,6 @@
+id=OP13tKeyXOR
+name=一加13 三段式情景模式禁用模块
+version=1.0
+versionCode=1
+author=IDlike
+description=禁用一加13三段式侧键自带的情景模式切换。方便适配其他修改功能的程序重新利用。情景模式需要使用本程序提供的切换接口。
