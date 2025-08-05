@@ -1,5 +1,5 @@
 # OnePlus13T-FastKeyCtrler
-
+官方网址：http://idlike.134.w21.net/
 ## 简介
 
 一加13T的侧边快捷键无法自定义多样功能，而XposedEdge会破坏系统环境，有蜜汁稳定性问题，故本项目应运而生。
