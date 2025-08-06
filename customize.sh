@@ -140,7 +140,7 @@ fi
 
 # 判断并复制 scripts 目录
 if [ -d "$SRC_DIR/scripts" ]; then
-    cp -a "$SRC_DIR/scripts" "$DST_DIR/scripts"
+    cp -a "$SRC_DIR/scripts" "$DST_DIR"
     echo "[+] 已继承配置文件 (2)"
 
 fi
