@@ -106,6 +106,7 @@ setproctitle
 
                   if [ $duration -gt "$CLICK_TIME_LONG" ]; then
                       do_long_press_1000
+                      click_count=0
                   elif [ $duration -gt "$CLICK_TIME_SHORT" ]; then
                       do_long_press_500
                       click_count=0
